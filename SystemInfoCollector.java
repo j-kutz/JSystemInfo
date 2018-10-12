@@ -1,5 +1,3 @@
-package application;
-
 import org.hyperic.sigar.*;
 
 public class SystemInfoCollector {
@@ -18,6 +16,9 @@ public class SystemInfoCollector {
 	private String procVendor;
 	private String uptimeFormatted;
 	
+	/*
+	 * All gathering is done when this constructor is called
+	 */
 	public SystemInfoCollector() throws SigarException {
 		sigar = new Sigar();
 		mem = new Mem();
@@ -41,6 +42,10 @@ public class SystemInfoCollector {
 		uptimeFormatted = timeFormatter(uptime.getUptime());
 	}
 	
+	/*
+	 * @param time is time value in seconds
+	 * @return a formatted string that shows the hours, minutes and seconds
+	 */
 	private String timeFormatter(double time) {
 		int hours, minutes, seconds;
 		seconds = (int) time;
@@ -49,5 +54,48 @@ public class SystemInfoCollector {
 		minutes = seconds/60;
 		seconds -= (minutes*60);
 		return hours + ":" + minutes + ":" + seconds;
+	}
+
+	/*
+	 * get methods for all String fields
+	 */
+	public String getOsName() {
+		return osName;
+	}
+
+	public String getOsVersion() {
+		return osVersion;
+	}
+
+	public String getOsArch() {
+		return osArch;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getMemTotal() {
+		return memTotal;
+	}
+
+	public String getMemUsed() {
+		return memUsed;
+	}
+	
+	public String getProcInfo() {
+		return procInfo;
+	}
+
+	public String getNumCores() {
+		return numCores;
+	}
+
+	public String getProcVendor() {
+		return procVendor;
+	}
+
+	public String getUptimeFormatted() {
+		return uptimeFormatted;
 	}
 }
